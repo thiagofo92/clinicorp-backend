@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/index.mjs",
     "seed": "node seed/mongo.mjs",
-    "test": "pnpm exec seed && vitest"
+    "test": "pnpm run seed && vitest"
   },
   "keywords": [],
   "author": "",

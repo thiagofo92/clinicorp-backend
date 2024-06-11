@@ -12,6 +12,7 @@ import { UserSchema } from '../src/repository/schema/index.mjs'
     const conn = await Mongo.connect(uri, { user, pass, dbName })
 
     try {
+      await drop(conn)
       const promise = []
 
       promise.push(seedUser(conn))
@@ -57,4 +58,11 @@ async function seedUser(conn) {
   await model.insertMany(mock)
 }
 
+/**
+ * @param {Mongo} conn
+ * */
+async function drop(conn) {
+  await conn.connection.dropDatabase()
+  console.log(`Database droped ${conn.connection.db.databaseName}`)
+}
 
