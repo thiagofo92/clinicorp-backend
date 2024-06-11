@@ -1,3 +1,24 @@
+/**
+ * @typedef User
+ * @type {Object}
+ * @property {string} id
+ * @property {string} name
+ * @property {string} login
+ * @property {string} pass
+ * */
+
+/**
+ * @typedef SeedMock
+ * @type{Object}
+ * @property {User} main
+ * @property {User} toupdate
+ * @property {User} todelete
+ * @property {{id: string}} tonotfound
+ * */
+
+/**
+ * @type {SeedMock}
+ * */
 export const UserMock = {
   main: {
     id: '6668613e8b10225532b3584c',
