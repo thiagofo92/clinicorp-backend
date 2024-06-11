@@ -9,12 +9,12 @@ export class MongoConnection {
   static instance
 
   /**
-   * @type {Mongo}
+   * @type {typeof Mongo}
    * */
   #conn
 
   /**
-   * @param {Mongo} conn - MongoDB connection
+   * @param {typeof Mongo} conn - MongoDB connection
    * */
   constructor(conn) {
     this.#conn = conn
@@ -27,17 +27,17 @@ export class MongoConnection {
     const uri = process.env.MONGO_URI || ''
     const user = process.env.MONGO_USER || ''
     const pass = process.env.MONGO_PASS || ''
-
-    const mongo = await Mongo.connect(uri, { user, pass })
+    const dbName = process.env.MONGO_DB
+    const mongo = await Mongo.connect(uri, { user, pass, dbName })
 
     this.instance = new MongoConnection(mongo)
   }
 
   /**
    * @param {string} model 
-   * @param {*} schema 
-   * @param {*} collection 
-   * @param {*} opts 
+   * @param {*} [schema]
+   * @param {*} [collection]
+   * @param {*} [opts]
    * @returns {Mongo.Model}
    * */
   static getModel(model, schema, collection, opts) {
