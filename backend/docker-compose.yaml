@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: "api-clini"
+    image: node:20.14.0
+    ports:
+      - 3500:3500
+    depends_on:
+      - db
+
+  db:
+    container_name: "db-clini"
+    image: mongo
+    ports:
+      - 5005:27017
