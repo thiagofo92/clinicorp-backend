@@ -12,5 +12,8 @@ services:
   db:
     container_name: "db-clini"
     image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "clini"
+      MONGO_INITDB_ROOT_PASSWORD: "clini"
     ports:
       - 5005:27017
