@@ -15,7 +15,7 @@ import { UserSchema } from '../src/repository/schema/index.mjs'
       await drop(conn)
       const promise = []
 
-      promise.push(seedUser(conn))
+      promise.push(seed(conn, 'users', UserSchema, UserMock))
 
       const result = await Promise.allSettled(promise)
 
@@ -32,30 +32,35 @@ import { UserSchema } from '../src/repository/schema/index.mjs'
 
 /**
  * @param {Mongo} conn
+ * @param {string} modelName
+ * @param {*} schema
+ * @param {*} mock
  * */
-async function seedUser(conn) {
-  const model = conn.model('users', UserSchema)
-  const mock = []
-  mock.push({
-    _id: UserMock.main.id,
-    name: UserMock.main.name,
-    login: UserMock.main.login,
-    pass: UserMock.main.pass
-  })
-  mock.push({
-    _id: UserMock.toupdate.id,
-    name: UserMock.toupdate.name,
-    login: UserMock.toupdate.login,
-    pass: UserMock.toupdate.pass
-  })
-  mock.push({
-    _id: UserMock.todelete.id,
-    name: UserMock.todelete.name,
-    login: UserMock.todelete.login,
-    pass: UserMock.todelete.pass
-  })
+async function seed(conn, modelName, schema, mock) {
+  const model = conn.model(modelName, schema)
+  const input = []
 
-  await model.insertMany(mock)
+  for (const [key, values] of Object.entries(mock)) {
+    if (key !== 'tonotfound') input.push(generate(values))
+  }
+
+  await model.insertMany(input)
+}
+
+/**
+ * @param {*} obj 
+ * @returns {*}
+ * @description Function to create a data dynamicaly using the values in Mock data, this data is to be use in MongoDd
+ * @example { _id: 'mongodb id', ...Object }
+ * */
+function generate(obj) {
+  const dyn = {}
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (key == 'id') dyn._id = value
+    else dyn[key] = value
+  }
+  return dyn
 }
 
 /**
