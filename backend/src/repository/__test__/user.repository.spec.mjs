@@ -4,6 +4,7 @@ import { describe, test, beforeAll, afterAll, expect } from 'vitest'
 import { MongoConnection } from '../connection/mongo.connection.mjs'
 import { UserRepository } from '../user.repository.mjs'
 import { UserMock } from './mock/user.mock.mjs'
+import { InternalServer } from '../../shared/error/general.error.mjs'
 
 describe('# User - [Unit Test]', () => {
   beforeAll(async () => {
@@ -13,10 +14,11 @@ describe('# User - [Unit Test]', () => {
   afterAll(async () => {
     await MongoConnection.disconnect()
   })
+
   test('Create - [SUCESS] - "Create a new user"', async () => {
     const rep = new UserRepository()
     const mock = {
-      name: UserMock.main.name,
+      name: UserMock.main.name + 'Test',
       login: UserMock.main.login,
       pass: UserMock.main.pass
     }
@@ -37,7 +39,7 @@ describe('# User - [Unit Test]', () => {
     const result = await rep.create({})
 
     MongoConnection.instance = instance
-    expect(result).toStrictEqual('')
+    expect(result).toBeInstanceOf(InternalServer)
   })
 
   test('Auth - [SUCESS] - "Authenticate the user login"', async () => {

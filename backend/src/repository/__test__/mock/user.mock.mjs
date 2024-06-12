@@ -1,23 +1,14 @@
 /**
- * @typedef User
- * @type {Object}
- * @property {string} id
- * @property {string} name
- * @property {string} login
- * @property {string} pass
- * */
-
-/**
- * @typedef SeedMock
+ * @typedef SeedUser
  * @type{Object}
- * @property {User} main
- * @property {User} toupdate
- * @property {User} todelete
+ * @property {import("entity/user.entity.mjs").UserEntity} main
+ * @property {import("entity/user.entity.mjs").UserEntity} toupdate
+ * @property {import("entity/user.entity.mjs").UserEntity} todelete
  * @property {{id: string}} tonotfound
  * */
 
 /**
- * @type {SeedMock}
+ * @type {SeedUser}
  * */
 export const UserMock = {
   main: {
@@ -42,4 +33,3 @@ export const UserMock = {
     id: '666861721d2aab3e94b56e16'
   }
 }
-

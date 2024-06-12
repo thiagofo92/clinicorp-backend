@@ -1,15 +1,15 @@
-import { UserEntity } from "entity/index.mjs";
 import { MongoConnection } from "./connection/mongo.connection.mjs";
 import { UserSchema } from "./schema/user.schema.mjs";
-import { Logger } from "shared/logger.mjs";
+import { Logger } from "../shared/logger.mjs";
+import { InternalServer } from "../shared/error/general.error.mjs";
 
 export class UserRepository {
   #modelName = 'users'
   constructor() { }
 
   /**
-   * @param {UserEntity} user 
-   * @returns {Promise<string>}
+   * @param {import("dto/user.dto.mjs").UserCreateDto} user 
+   * @returns {Promise<string|InternalServer>}
    * */
   async create(user) {
     try {
@@ -19,14 +19,14 @@ export class UserRepository {
       return result._id.toHexString()
     } catch (error) {
       Logger.error('Error to create user: ', error)
-      return ''
+      return new InternalServer()
     }
   }
 
   /**
    * @param {string} login 
    * @param {string} pass 
-   * @returns {Promise<boolean>}
+   * @returns {Promise<boolean|InternalServer>}
    * */
   async auth(login, pass) {
     try {
@@ -37,8 +37,8 @@ export class UserRepository {
 
       return true
     } catch (error) {
-      Logger.error('Error to create user: ', error)
-      return false
+      Logger.error('Error to auth user: ', error)
+      return new InternalServer()
     }
   }
 }
