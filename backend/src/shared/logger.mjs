@@ -1,7 +1,10 @@
 import Winston, { format, transports } from 'winston'
 
+// disable logs from winston in test env
 const transportsOptions = [
-  new transports.Console()
+  new transports.Console({
+    silent: process.env.NODE_ENV == 'test'
+  })
 ]
 
 const options = {
