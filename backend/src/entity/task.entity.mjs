@@ -10,3 +10,8 @@
  * @property {string} completedBy
  * @property {Date} completedAt
  * */
+
+export const TASK_STATUS = {
+  COMPLETED: 1,
+  PENDING: 0
+}

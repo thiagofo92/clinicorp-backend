@@ -13,3 +13,11 @@ export class InternalServer extends Error {
     this.message = 'Unexpected error - Internal server error'
   }
 }
+
+export class EmptyContent extends Error {
+  constructor() {
+    super()
+    this.name = 'EmptyContent'
+    this.message = 'Empty content'
+  }
+}
