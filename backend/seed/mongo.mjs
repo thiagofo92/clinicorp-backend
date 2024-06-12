@@ -1,34 +1,36 @@
 import 'dotenv/config'
 import Mongo from 'mongoose'
-import { UserMock } from '../src/repository/__test__/mock/user.mock.mjs'
-import { UserSchema } from '../src/repository/schema/index.mjs'
+import { UserMock, ProjectMock } from '../src/repository/__test__/mock/index.mjs'
+import { ProjectSchema, UserSchema } from '../src/repository/schema/index.mjs'
 
-  ; (async () => {
-    console.log('------ Start Seed -------')
-    const uri = process.env.MONGO_URI || ''
-    const user = process.env.MONGO_USER
-    const pass = process.env.MONGO_PASS
-    const dbName = process.env.MONGO_DB
-    const conn = await Mongo.connect(uri, { user, pass, dbName })
+(async () => {
+  console.log('------ Start Seed -------')
+  const uri = process.env.MONGO_URI || ''
+  const user = process.env.MONGO_USER
+  const pass = process.env.MONGO_PASS
+  const dbName = process.env.MONGO_DB
+  const conn = await Mongo.connect(uri, { user, pass, dbName })
 
-    try {
-      await drop(conn)
-      const promise = []
+  try {
+    await drop(conn)
+    const promise = []
 
-      promise.push(seed(conn, 'users', UserSchema, UserMock))
+    promise.push(seed(conn, 'users', UserSchema, UserMock))
+    promise.push(seed(conn, 'projects', ProjectSchema, ProjectMock))
 
-      const result = await Promise.allSettled(promise)
 
-      for (const value of result) {
-        if (value.status == 'rejected') console.error(value.reason)
-      }
-    } catch (error) {
-      console.error(error)
+    const result = await Promise.allSettled(promise)
+
+    for (const value of result) {
+      if (value.status == 'rejected') console.error(value.reason)
     }
+  } catch (error) {
+    console.error(error)
+  }
 
-    console.log('------ End Seed -------')
-    process.exit(0)
-  })()
+  console.log('------ End Seed -------')
+  process.exit(0)
+})()
 
 /**
  * @param {Mongo} conn
