@@ -7,6 +7,7 @@
  * @property {{id: string}} tonotfound
  * */
 
+import { TASK_STATUS } from "../../../entity/task.entity.mjs";
 import { ProjectMock } from "./project.mock.mjs";
 import { UserMock } from "./user.mock.mjs";
 
@@ -19,7 +20,7 @@ export const TaskMock = {
     projectId: ProjectMock.main.id,
     title: 'Task mock - Main',
     description: 'task created by mock',
-    status: 1,
+    status: TASK_STATUS.COMPLETED,
     createdAt: new Date(),
     completedBy: UserMock.main.id,
     completedAt: new Date()
@@ -29,7 +30,7 @@ export const TaskMock = {
     projectId: ProjectMock.main.id,
     title: 'Task mock - To update',
     description: 'task created by mock',
-    status: 1,
+    status: TASK_STATUS.COMPLETED,
     createdAt: new Date(),
     completedBy: UserMock.main.id,
     completedAt: new Date()
@@ -39,7 +40,7 @@ export const TaskMock = {
     projectId: ProjectMock.main.id,
     title: 'Task mock - To Delete',
     description: 'task created by mock',
-    status: 1,
+    status: TASK_STATUS.COMPLETED,
     createdAt: new Date(),
     completedBy: UserMock.main.id,
     completedAt: new Date()

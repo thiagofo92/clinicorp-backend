@@ -109,7 +109,7 @@ describe('# Projects - Unit', () => {
     MongoConnection.instance = null
 
     // @ts-ignore
-    const result = await rep.update({})
+    const result = await rep.findById({})
 
     MongoConnection.instance = instance
     expect(result).toBeInstanceOf(InternalServer)
