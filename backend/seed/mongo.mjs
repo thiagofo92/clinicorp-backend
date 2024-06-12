@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import Mongo from 'mongoose'
-import { UserMock, ProjectMock } from '../src/repository/__test__/mock/index.mjs'
-import { ProjectSchema, UserSchema } from '../src/repository/schema/index.mjs'
+import { UserMock, ProjectMock, TaskMock } from '../src/repository/__test__/mock/index.mjs'
+import { ProjectSchema, UserSchema, TaskSchema } from '../src/repository/schema/index.mjs'
 
 (async () => {
   console.log('------ Start Seed -------')
@@ -17,7 +17,7 @@ import { ProjectSchema, UserSchema } from '../src/repository/schema/index.mjs'
 
     promise.push(seed(conn, 'users', UserSchema, UserMock))
     promise.push(seed(conn, 'projects', ProjectSchema, ProjectMock))
-
+    promise.push(seed(conn, 'tasks', TaskSchema, TaskMock))
 
     const result = await Promise.allSettled(promise)
 
@@ -47,6 +47,7 @@ async function seed(conn, modelName, schema, mock) {
   }
 
   await model.insertMany(input)
+  console.log(`Created doc ${modelName}`)
 }
 
 /**
