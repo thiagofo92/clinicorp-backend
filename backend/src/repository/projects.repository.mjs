@@ -41,7 +41,6 @@ export class ProjectsRepository {
 
       if (result.matchedCount <= 0) return new NotFound()
 
-      console.log(result)
       return
     } catch (error) {
       Logger.error(`Error to update project`)

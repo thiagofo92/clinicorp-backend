@@ -46,6 +46,43 @@ describe('# Projects - Unit', () => {
 
   test('Update - [SUCCESS] - "Update the project by id"', async () => {
     const rep = new ProjectsRepository()
+    const input = {
+      id: ProjectMock.main.id,
+      name: 'test - update',
+      description: 'test to update the data'
+    }
+    const result = await rep.update(input)
+
+    expect(result).not.toBeInstanceOf(Error)
+  })
+
+  test('Update - [ERROR] - "Project not found"', async () => {
+    const rep = new ProjectsRepository()
+    const input = {
+      id: ProjectMock.tonotfound.id,
+      name: 'test',
+      description: 'test'
+    }
+    const result = await rep.update(input)
+    expect(result).toBeInstanceOf(NotFound)
+  })
+
+  test('Update - [ERROR] - "Internal server error"', async () => {
+    const rep = new ProjectsRepository()
+    const { instance } = MongoConnection
+
+    // @ts-ignore
+    MongoConnection.instance = null
+
+    // @ts-ignore
+    const result = await rep.update({})
+
+    MongoConnection.instance = instance
+    expect(result).toBeInstanceOf(InternalServer)
+  })
+
+  test('FindById - [SUCCESS] - "Find project by ID"', async () => {
+    const rep = new ProjectsRepository()
     const input = projectsMock()
     const result = await rep.create(input)
 
