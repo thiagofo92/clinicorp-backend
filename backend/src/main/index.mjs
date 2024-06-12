@@ -1,18 +1,19 @@
-import * as ApiConfig from '../config/index.mjs'
-
+import 'dotenv'
 import Express from 'express'
+import { MainRouter } from './routers/main.router.mjs'
+import * as ApiConfig from '../config/index.mjs'
+import { MongoConnection } from '../repository/connection/mongo.connection.mjs'
 
-const app = Express()
+export async function Start() {
+  const app = Express()
+  const mainRouter = new MainRouter(Express.Router())
 
-app.use(Express.json())
-app.use(Object.values(ApiConfig))
+  await MongoConnection.setup()
+  app.use(Express.json())
+  app.use(Object.values(ApiConfig))
 
-app.get('/test', async (req, res) => {
-  res.end('Ok')
-  return
-})
-
-export function Start() {
+  app.use('/api', mainRouter.build())
+  app.get('/ping', (req, res) => res.status(200).json({ message: 'pong' }))
   const server = process.env.SEVER_HOST || '0.0.0.0'
   const port = process.env.SERVER_PORT || 3500
   app.listen(Number(port), server, () => console.info('Server is running on port 3500'))

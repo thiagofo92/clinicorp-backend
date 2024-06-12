@@ -1,16 +1,16 @@
 /**
  * @typedef SeedUser
  * @type{Object}
- * @property {import("entity/user.entity.mjs").UserEntity} main
- * @property {import("entity/user.entity.mjs").UserEntity} toupdate
- * @property {import("entity/user.entity.mjs").UserEntity} todelete
+ * @property {import("entity/login.entity.mjs").LoginEntity} main
+ * @property {import("entity/login.entity.mjs").LoginEntity} toupdate
+ * @property {import("entity/login.entity.mjs").LoginEntity} todelete
  * @property {{id: string}} tonotfound
  * */
 
 /**
  * @type {SeedUser}
  * */
-export const UserMock = {
+export const LoginMock = {
   main: {
     id: '6668613e8b10225532b3584c',
     name: 'User mock main',

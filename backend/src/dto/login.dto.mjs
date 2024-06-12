@@ -1,5 +1,5 @@
 /**
- * @typedef UserCreateDto
+ * @typedef LoginCreateDto
  * @type {Object}
  * @property {string} name
  * @property {string} login
@@ -7,7 +7,7 @@
  * */
 
 /**
- * @typedef UserUpdateDto
+ * @typedef LoginUpdateDto
  * @type {Object}
  * @property {string} id
  * @property {string} [ name ]

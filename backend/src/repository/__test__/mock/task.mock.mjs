@@ -9,7 +9,7 @@
 
 import { TASK_STATUS } from "../../../entity/task.entity.mjs";
 import { ProjectMock } from "./project.mock.mjs";
-import { UserMock } from "./user.mock.mjs";
+import { LoginMock } from "./user.mock.mjs";
 
 /**
  * @type {SeedTask}
@@ -22,7 +22,7 @@ export const TaskMock = {
     description: 'task created by mock',
     status: TASK_STATUS.COMPLETED,
     createdAt: new Date(),
-    completedBy: UserMock.main.id,
+    completedBy: LoginMock.main.id,
     completedAt: new Date()
   },
   toupdate: {
@@ -32,7 +32,7 @@ export const TaskMock = {
     description: 'task created by mock',
     status: TASK_STATUS.COMPLETED,
     createdAt: new Date(),
-    completedBy: UserMock.main.id,
+    completedBy: LoginMock.main.id,
     completedAt: new Date()
   },
   todelete: {
@@ -42,7 +42,7 @@ export const TaskMock = {
     description: 'task created by mock',
     status: TASK_STATUS.COMPLETED,
     createdAt: new Date(),
-    completedBy: UserMock.main.id,
+    completedBy: LoginMock.main.id,
     completedAt: new Date()
   },
   tonotfound: {

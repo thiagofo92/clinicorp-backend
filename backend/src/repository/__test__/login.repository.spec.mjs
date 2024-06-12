@@ -2,8 +2,8 @@ import 'dotenv/config'
 import { describe, test, beforeAll, afterAll, expect } from 'vitest'
 
 import { MongoConnection } from '../connection/mongo.connection.mjs'
-import { UserRepository } from '../user.repository.mjs'
-import { UserMock } from './mock/user.mock.mjs'
+import { LoginRepository } from '../login.repository.mjs'
+import { LoginMock } from './mock/user.mock.mjs'
 import { InternalServer } from '../../shared/error/general.error.mjs'
 
 describe('# User - [Unit Test]', () => {
@@ -16,11 +16,11 @@ describe('# User - [Unit Test]', () => {
   })
 
   test('Create - [SUCESS] - "Create a new user"', async () => {
-    const rep = new UserRepository()
+    const rep = new LoginRepository()
     const mock = {
-      name: UserMock.main.name + 'Test',
-      login: UserMock.main.login,
-      pass: UserMock.main.pass
+      name: LoginMock.main.name + 'Test',
+      login: LoginMock.main.login,
+      pass: LoginMock.main.pass
     }
     const id = await rep.create(mock)
 
@@ -29,7 +29,7 @@ describe('# User - [Unit Test]', () => {
   })
 
   test('Create - [ERROR] - "Internal server error"', async () => {
-    const rep = new UserRepository()
+    const rep = new LoginRepository()
     const { instance } = MongoConnection
 
     // @ts-ignore
@@ -43,16 +43,16 @@ describe('# User - [Unit Test]', () => {
   })
 
   test('Auth - [SUCESS] - "Authenticate the user login"', async () => {
-    const rep = new UserRepository()
-    const { login, pass } = UserMock.main
+    const rep = new LoginRepository()
+    const { login, pass } = LoginMock.main
     const exist = await rep.auth(login, pass)
 
     expect(exist).toStrictEqual(true)
   })
 
   test('Auth - [ERROR] - "Invalid login or pass"', async () => {
-    const rep = new UserRepository()
-    const { login } = UserMock.main
+    const rep = new LoginRepository()
+    const { login } = LoginMock.main
     const exist = await rep.auth(login, '12')
 
     expect(exist).toStrictEqual(false)

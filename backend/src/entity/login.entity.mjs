@@ -1,5 +1,5 @@
 /**
- * @typedef UserEntity
+ * @typedef LoginEntity
  * @type {Object}
  * @property {string} id
  * @property {string} name
