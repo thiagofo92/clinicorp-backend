@@ -79,11 +79,11 @@ export class ProjectsRepository {
    * @param {number} page 
    * @returns {Promise<Array<import("entity/project.entity.mjs").ProjectEntity>|NotFound|InternalServer>}
    * */
-  async findByUser(userId, offset, page) {
+  async findByUserId(userId, offset, page) {
     try {
       const model = MongoConnection.getModel(this.#modelName, ProjectSchema)
       const result = await model.find({ userRootId: userId })
-        .skip(page * (offset - 1))
+        .skip(offset * (page - 1))
         .limit(offset)
 
       if (result.length <= 0) return new NotFound()
