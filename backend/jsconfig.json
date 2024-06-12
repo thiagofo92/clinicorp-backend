@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./",
     "baseUrl": "./src",
     "moduleResolution": "Node",
     "checkJs": true,
@@ -9,6 +10,6 @@
     "resolveJsonModule": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
   ]
 }
