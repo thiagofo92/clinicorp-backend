@@ -111,7 +111,6 @@ export class ProjectsRepository {
       const result = await model.deleteOne({ _id: id })
 
       if (result.deletedCount <= 0) return new NotFound()
-
       return true
     } catch (error) {
       Logger.error(`Error to delete project ID:[${id}]`)
