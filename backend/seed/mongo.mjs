@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import Mongo from 'mongoose'
-import { UserMock, ProjectMock, TaskMock } from '../src/repository/__test__/mock/index.mjs'
-import { ProjectSchema, UserSchema, TaskSchema } from '../src/repository/schema/index.mjs'
+import { LoginMock, ProjectMock, TaskMock } from '../src/repository/__test__/mock/index.mjs'
+import { ProjectSchema, LoginSchema, TaskSchema } from '../src/repository/schema/index.mjs'
 
 (async () => {
   console.log('------ Start Seed -------')
@@ -15,7 +15,7 @@ import { ProjectSchema, UserSchema, TaskSchema } from '../src/repository/schema/
     await drop(conn)
     const promise = []
 
-    promise.push(seed(conn, 'users', UserSchema, UserMock))
+    promise.push(seed(conn, 'users', LoginSchema, LoginMock))
     promise.push(seed(conn, 'projects', ProjectSchema, ProjectMock))
     promise.push(seed(conn, 'tasks', TaskSchema, TaskMock))
 
