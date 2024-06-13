@@ -21,3 +21,11 @@ export class EmptyContent extends Error {
     this.message = 'Empty content'
   }
 }
+
+export class InvalidToken extends Error {
+  constructor() {
+    super()
+    this.name = 'InvalidToken'
+    this.message = 'Token invalid or empty'
+  }
+}
