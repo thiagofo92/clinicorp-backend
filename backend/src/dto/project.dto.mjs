@@ -4,7 +4,6 @@
  * @property {string} name
  * @property {string} userRootId
  * @property {string} description
- * @property {Date} createdAt
  * */
 
 /**

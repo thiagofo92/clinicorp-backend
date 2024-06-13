@@ -21,7 +21,7 @@ export class ProjectController {
    * */
   async create(req, res) {
     const { body } = req
-
+    console.log('here')
     const result = await this.#rep.create(body)
 
     if (result instanceof Error) {

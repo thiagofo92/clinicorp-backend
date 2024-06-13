@@ -1,3 +1,4 @@
+import { AuthJwt } from "../validation/auth/jwt.mjs";
 import { LoginRepository } from "../repository/index.mjs";
 import { HttpResponse, HttpResponseError } from "../shared/http/response.http.mjs";
 
@@ -30,9 +31,9 @@ export class LoginController {
       return
     }
 
-    const data = HttpResponse(result, 201)
+    const { data, code } = HttpResponse(result, 201)
 
-    res.status(data.code).json({ data })
+    res.status(code).json({ data })
     return
   }
 
@@ -45,5 +46,17 @@ export class LoginController {
     const { login, pass } = req.body
     const result = await this.#rep.auth(login, pass)
 
+    if (result instanceof Error) {
+      const err = HttpResponseError(result)
+      res.status(err.code).json({ data: err.data })
+      return
+    }
+
+    const token = AuthJwt.sign(result.id)
+
+    const { data, code } = HttpResponse({ token }, 201)
+
+    res.status(code).json({ data })
+    return
   }
 }

@@ -13,6 +13,7 @@ export async function Start() {
   app.use(Object.values(ApiConfig))
 
   app.use('/api', mainRouter.build())
+  console.log(app.mountpath)
   app.get('/ping', (req, res) => res.status(200).json({ message: 'pong' }))
   const server = process.env.SEVER_HOST || '0.0.0.0'
   const port = process.env.SERVER_PORT || 3500
