@@ -1,12 +1,12 @@
-import { LoginCreateSchemaValidation } from '../../../validation/schema/user.validation.mjs'
-
+import { LoginAuthSchemaValidation, LoginCreateSchemaValidation } from '../../../validation/schema/login.validation.mjs'
 
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  * @param {import('express').NextFunction} next
+ * @returns {Promise<void>}
  * */
-export function LoginCreateMiddleware(req, res, next) {
+export async function LoginCreateMiddleware(req, res, next) {
   const { body } = req
 
   const result = LoginCreateSchemaValidation.safeParse(body)
@@ -20,11 +20,12 @@ export function LoginCreateMiddleware(req, res, next) {
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  * @param {import('express').NextFunction} next
+ * @returns {Promise<void>}
  * */
-export function LoginAuthMiddleware(req, res, next) {
+export async function LoginAuthMiddleware(req, res, next) {
   const { body } = req
 
-  const result = LoginCreateSchemaValidation.safeParse(body)
+  const result = LoginAuthSchemaValidation.safeParse(body)
 
   if (result.success) return next()
 
