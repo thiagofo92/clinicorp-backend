@@ -8,11 +8,7 @@ import { ProjectCreateSchemaValidation, ProjectIdSchemaValidate, ProjectUpdateSc
  * @returns {Promise<void>}
  * */
 export async function ProjectCreateMiddlware(req, res, next) {
-  const payload = {
-    userRootId: req.params.userId,
-    ...req.body
-  }
-  const result = ProjectCreateSchemaValidation.safeParse(payload)
+  const result = ProjectCreateSchemaValidation.safeParse(req.body)
 
   if (result.success) return next()
 
@@ -27,7 +23,7 @@ export async function ProjectCreateMiddlware(req, res, next) {
  * */
 export async function ProjectUpdateMiddlware(req, res, next) {
   const payload = {
-    userRootId: req.params.userId,
+    id: req.params.id,
     ...req.body
   }
   const result = ProjectUpdateSchemaValidaion.safeParse(payload)
@@ -44,7 +40,7 @@ export async function ProjectUpdateMiddlware(req, res, next) {
  * @returns {Promise<void>}
  * */
 export async function ProjectIdMiddlware(req, res, next) {
-  const result = ProjectIdSchemaValidate.safeParse(req.params.projectId)
+  const result = ProjectIdSchemaValidate.safeParse(req.params.id)
 
   if (result.success) return next()
 

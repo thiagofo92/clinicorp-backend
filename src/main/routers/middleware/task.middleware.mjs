@@ -8,11 +8,7 @@ import { TaskCreateSchemaValidation, TaskIdSchemaValidate, TaskUpdateSchemaValid
  * @returns {Promise<void>}
  * */
 export async function TaskCreateMiddlware(req, res, next) {
-  const payload = {
-    projectId: req.params.projectId,
-    ...req.body
-  }
-  const result = TaskCreateSchemaValidation.safeParse(payload)
+  const result = TaskCreateSchemaValidation.safeParse(req.body)
 
   if (result.success) return next()
 
@@ -27,7 +23,7 @@ export async function TaskCreateMiddlware(req, res, next) {
  * */
 export async function TaskUpdateMiddlware(req, res, next) {
   const payload = {
-    id: req.params.taskId,
+    id: req.params.id,
     ...req.body
   }
   const result = TaskUpdateSchemaValidaion.safeParse(payload)
@@ -44,8 +40,7 @@ export async function TaskUpdateMiddlware(req, res, next) {
  * @returns {Promise<void>}
  * */
 export async function TaskIdMiddlware(req, res, next) {
-  // TODO
-  const result = TaskIdSchemaValidate.safeParse(req.params.taskId)
+  const result = TaskIdSchemaValidate.safeParse(req.params.id)
 
   if (result.success) return next()
 
@@ -60,7 +55,7 @@ export async function TaskIdMiddlware(req, res, next) {
  * */
 export async function TaskProjectIdMiddlware(req, res, next) {
   // TODO
-  const result = TaskIdSchemaValidate.safeParse(req.params.projectId)
+  const result = TaskIdSchemaValidate.safeParse(req.query.projectId)
 
   if (result.success) return next()
 

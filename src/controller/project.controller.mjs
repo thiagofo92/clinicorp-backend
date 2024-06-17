@@ -29,9 +29,9 @@ export class ProjectController {
       return
     }
 
-    const data = HttpResponse(result, 201)
+    const data = HttpResponse({ id: result }, 201)
 
-    res.status(data.code).json({ data })
+    res.status(data.code).json(data)
     return
   }
 
@@ -53,7 +53,7 @@ export class ProjectController {
       return
     }
 
-    const data = HttpResponse(result, 200)
+    const data = HttpResponse(result, 204)
 
     res.status(data.code).json({ data })
     return
@@ -77,7 +77,7 @@ export class ProjectController {
 
     const data = HttpResponse(result, 200)
 
-    res.status(data.code).json({ data })
+    res.status(data.code).json(data)
     return
   }
 
@@ -88,8 +88,10 @@ export class ProjectController {
    * */
   async findByUserId(req, res) {
     const { userId } = req.query
+    const offset = Number(req.query.offset) || 20
+    const page = Number(req.query.page) || 1
     //TODO Try to use the user ID in url or use as a context
-    const result = await this.#rep.findById(String(userId))
+    const result = await this.#rep.findByUserId(String(userId), offset, page)
 
     if (result instanceof Error) {
       const err = HttpResponseError(result)
@@ -99,7 +101,7 @@ export class ProjectController {
 
     const data = HttpResponse(result, 200)
 
-    res.status(data.code).json({ data })
+    res.status(data.code).json(data)
     return
   }
 
@@ -121,7 +123,7 @@ export class ProjectController {
 
     const data = HttpResponse(result, 200)
 
-    res.status(data.code).json({ data })
+    res.status(data.code).json(data)
     return
   }
 }
