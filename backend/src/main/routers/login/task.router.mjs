@@ -29,6 +29,7 @@ export class TaskRouter {
   }
 
   build() {
+    this.#task()
     return this.#route
   }
 }

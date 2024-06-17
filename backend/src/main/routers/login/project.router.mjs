@@ -22,10 +22,10 @@ export class ProjectRouter {
 
   #project() {
     this.#route.post('/', ProjectCreateMiddlware, this.#controller.create.bind(this.#controller))
-    this.#route.put('/:projectId', ProjectUpdateMiddlware, this.#controller.update.bind(this.#controller))
-    this.#route.get('/:projectId', ProjectIdMiddlware, this.#controller.findById.bind(this.#controller))
+    this.#route.put('/:id', ProjectUpdateMiddlware, this.#controller.update.bind(this.#controller))
+    this.#route.get('/:id', ProjectIdMiddlware, this.#controller.findById.bind(this.#controller))
     this.#route.get('/', this.#controller.findByUserId.bind(this.#controller))
-    this.#route.delete('/:projectId', ProjectIdMiddlware, this.#controller.delete.bind(this.#controller))
+    this.#route.delete('/:id', ProjectIdMiddlware, this.#controller.delete.bind(this.#controller))
   }
 
   build() {

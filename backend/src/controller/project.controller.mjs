@@ -21,7 +21,6 @@ export class ProjectController {
    * */
   async create(req, res) {
     const { body } = req
-    console.log('here')
     const result = await this.#rep.create(body)
 
     if (result instanceof Error) {
@@ -66,7 +65,7 @@ export class ProjectController {
    * @returns {Promise<void>}
    * */
   async findById(req, res) {
-    const id = req.params
+    const id = req.params.id
 
     const result = await this.#rep.findById(String(id))
 
@@ -110,7 +109,7 @@ export class ProjectController {
    * @returns {Promise<void>}
    * */
   async delete(req, res) {
-    const id = req.params
+    const id = req.params.id
 
     const result = await this.#rep.delete(String(id))
 
