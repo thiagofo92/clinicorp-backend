@@ -65,3 +65,7 @@ objetos para trasitar os dados entre as camandas
 * MVC
 * DIP - [Dependency inversion principle](https://medium.com/@tbaragao/solid-d-i-p-dependency-inversion-principle-e87527f8d0be)
 * Singleto - [Padrão criacional](https://refactoring.guru/design-patterns/singleton)
+
+## Melhorias
+
+* Usar o PM2 para gerenciar a instância do NodeJS que irá rodar no servidor
